@@ -122,7 +122,7 @@ struct EditSceneTimelineView: View {
                             Text(type.displayName).tag(type)
                         }
                     }
-                    .onChange(of: newEventType) { newType in
+                    .onChange(of: newEventType) { _, newType in
                         // Reset character if switching to non-character event
                         if !newType.requiresCharacter {
                             newEventCharacterID = nil
@@ -300,6 +300,10 @@ struct EditSceneTimelineView: View {
     private func moveEvent(from source: IndexSet, to destination: Int) {
         scene.timeline.move(fromOffsets: source, toOffset: destination)
     }
+    
+    private func dismissKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }
 
 // MARK: - Enhanced Event Row View
@@ -475,6 +479,10 @@ struct EnhancedEditSingleEventView: View {
                 }
             }
         }
+    }
+    
+    private func dismissKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 

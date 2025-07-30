@@ -1,8 +1,10 @@
 import Foundation
+import SwiftData
 
 // Detailed Character model, now with nested structs for better organization.
 // FIX: Added Hashable and Equatable conformance to all nested structs.
-struct Character: Identifiable, Codable, Hashable, Equatable {
+@Model
+class Character {
     var id = UUID()
     var characterImageData: Data? = nil
     

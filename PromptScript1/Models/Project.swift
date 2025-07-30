@@ -1,16 +1,36 @@
 import Foundation
+import SwiftData
 
-struct Project: Identifiable, Codable {
-    var id = UUID()
+@Model
+class Project {
+    @Attribute(.unique) var id: UUID
     var name: String
-    var description: String = ""
-    var characters: [Character] = []
-    var scenes: [VideoScene] = []
-    var createdDate: Date = Date()
-    var lastModified: Date = Date()
+    var projectDescription: String
+    @Relationship(deleteRule: .cascade) var characters: [Character]
+    @Relationship(deleteRule: .cascade) var scenes: [VideoScene]
+    var createdDate: Date
+    var lastModified: Date
     
     // NEW: The overall visual style for the entire project.
-    var videoStyle: VideoStyle = .cinematic
-    var customVideoStyle: String = ""
+    var videoStyle: VideoStyle
+    var customVideoStyle: String
+    
+    init(name: String, description: String = "") {
+        self.id = UUID()
+        self.name = name
+        self.projectDescription = description
+        self.characters = []
+        self.scenes = []
+        self.createdDate = Date()
+        self.lastModified = Date()
+        self.videoStyle = VideoStyle.cinematic
+        self.customVideoStyle = ""
+    }
+    
+    // Computed property for backward compatibility
+    var description: String {
+        get { projectDescription }
+        set { projectDescription = newValue }
+    }
 }
 

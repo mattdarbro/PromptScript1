@@ -5,7 +5,7 @@ import SwiftUI
 
 struct ProjectContentView: View {
     @ObservedObject var projectManager: ProjectManager
-    let project: Project
+    @Bindable var project: Project
     
     @StateObject private var secureStorage = SecureStorage.shared
     @State private var selectedTab = 0

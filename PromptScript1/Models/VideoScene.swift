@@ -1,45 +1,76 @@
 import Foundation
+import SwiftData
 
 // NOTE: All 'enum' and helper 'struct' definitions have been removed from this file.
 // They are now correctly centralized in 'SharedAITypesAndModels.swift'.
 
 // MARK: - Updated VideoScene Model
-struct VideoScene: Identifiable, Codable, Hashable, Equatable {
-    var id = UUID()
-    var generatedImageData: Data? = nil
+@Model
+class VideoScene {
+    var id: UUID
+    var generatedImageData: Data?
     
-    var title: String = ""
-    var description: String = ""
-    var emotion: EmotionalTone = .dramatic
-    var customEmotion: String = ""
-    var setting: String = ""
-    var generatedPrompt: String = ""
+    var title: String
+    var description: String
+    var emotion: EmotionalTone
+    var customEmotion: String
+    var setting: String
+    var generatedPrompt: String
     
     // These types are now correctly referenced from the shared models file.
-    var shotMode: ShotMode = .single
-    var establishingShot: EstablishingShot = .wideAngle
-    var customEstablishingShot: String = ""
+    var shotMode: ShotMode
+    var establishingShot: EstablishingShot
+    var customEstablishingShot: String
     
-    var selectedCharacters: [UUID] = []
+    var selectedCharacters: [UUID]
     
-    var timeline: [TimelineEvent] = []
+    var timeline: [TimelineEvent]
     
-    var composition: Composition = Composition()
+    var composition: Composition
     
     // ADDED: Missing properties to resolve compiler errors.
-    var lighting: String = ""
-    var customLighting: String = ""
+    var lighting: String
+    var customLighting: String
     
-    var shotType: String = ""
-    var customShotType: String = ""
-    var cameraAngle: String = ""
-    var customCameraAngle: String = ""
-    var lensType: String = ""
-    var customLensType: String = ""
-    var focalLength: String = ""
-    var cameraMovement: String = ""
-    var customCameraMovement: String = ""
-    var colorGrading: String = ""
+    var shotType: String
+    var customShotType: String
+    var cameraAngle: String
+    var customCameraAngle: String
+    var lensType: String
+    var customLensType: String
+    var focalLength: String
+    var cameraMovement: String
+    var customCameraMovement: String
+    var colorGrading: String
+    
+    init() {
+        self.id = UUID()
+        self.generatedImageData = nil
+        self.title = ""
+        self.description = ""
+        self.emotion = EmotionalTone.dramatic
+        self.customEmotion = ""
+        self.setting = ""
+        self.generatedPrompt = ""
+        self.shotMode = ShotMode.single
+        self.establishingShot = EstablishingShot.wideAngle
+        self.customEstablishingShot = ""
+        self.selectedCharacters = []
+        self.timeline = []
+        self.composition = Composition()
+        self.lighting = ""
+        self.customLighting = ""
+        self.shotType = ""
+        self.customShotType = ""
+        self.cameraAngle = ""
+        self.customCameraAngle = ""
+        self.lensType = ""
+        self.customLensType = ""
+        self.focalLength = ""
+        self.cameraMovement = ""
+        self.customCameraMovement = ""
+        self.colorGrading = ""
+    }
     
     // MARK: - Enhanced Prompt Generation Method
     
@@ -135,18 +166,18 @@ struct VideoScene: Identifiable, Codable, Hashable, Equatable {
 
 // MARK: - Helper Extensions
 extension VideoScene {
-    mutating func addTimelineEvent(_ event: TimelineEvent) {
+    func addTimelineEvent(_ event: TimelineEvent) {
         timeline.append(event)
         if let characterID = event.characterID, !selectedCharacters.contains(characterID) {
             selectedCharacters.append(characterID)
         }
     }
     
-    mutating func removeTimelineEvent(id: UUID) {
+    func removeTimelineEvent(id: UUID) {
         timeline.removeAll { $0.id == id }
     }
     
-    mutating func moveTimelineEvent(from sourceIndex: Int, to destinationIndex: Int) {
+    func moveTimelineEvent(from sourceIndex: Int, to destinationIndex: Int) {
         guard sourceIndex != destinationIndex,
               sourceIndex >= 0, sourceIndex < timeline.count,
               destinationIndex >= 0, destinationIndex <= timeline.count else { return }

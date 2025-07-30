@@ -55,7 +55,7 @@ struct AddSceneView: View {
                         }
                     }
                     .font(.custom("Courier New", size: 14))
-                    .onChange(of: newEventType) { newType in
+                    .onChange(of: newEventType) { _, newType in
                         // Reset character if switching to non-character event
                         if !newType.requiresCharacter {
                             newEventCharacterID = nil
@@ -127,9 +127,9 @@ struct AddSceneView: View {
                     .font(.custom("Courier New", size: 14))
                 }
             }
-            .onChange(of: selectedSettingPhoto) {
+            .onChange(of: selectedSettingPhoto) { _, newPhoto in
                 Task {
-                    guard let photoItem = selectedSettingPhoto else { return }
+                    guard let photoItem = newPhoto else { return }
                     if let data = try? await photoItem.loadTransferable(type: Data.self) {
                         selectedSettingImageData = data
                         analyzeSettingImage(imageData: data)

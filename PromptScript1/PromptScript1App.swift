@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct PromptScript1App: App {
@@ -19,6 +20,7 @@ struct PromptScript1App: App {
             ContentView()
                 .preferredColorScheme(.light) // Force light mode for typewriter aesthetic
         }
+        .modelContainer(for: [Project.self, Character.self, VideoScene.self])
     }
     
     // MARK: - Global Navigation Styling
