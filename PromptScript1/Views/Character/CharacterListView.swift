@@ -16,8 +16,7 @@ struct CharacterListView: View {
     }
     
     var body: some View {
-        NavigationView {
-            Group {
+        Group {
                 if characters.isEmpty {
                     // Empty state with typewriter aesthetic
                     VStack(spacing: 20) {
@@ -81,7 +80,6 @@ struct CharacterListView: View {
             .sheet(isPresented: $showingAddCharacter) {
                 AddCharacterSheet(characters: $characters)
             }
-        }
     }
     
     /// Deletes characters from the list at the specified offsets.

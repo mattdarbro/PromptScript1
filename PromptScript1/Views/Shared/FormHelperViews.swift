@@ -26,7 +26,7 @@ struct CinematographyPicker: View {
             
             if selection == "Custom" {
                 TextField("Enter custom value", text: $customSelection)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .textFieldStyle(TypewriterTextFieldStyle())
             }
         }
     }
@@ -59,11 +59,13 @@ struct CharacterActionRow: View {
             if isSelected {
                 Group {
                     TextField("Action (e.g., walking slowly)", text: binding(for: $characterActions))
+                        .textFieldStyle(TypewriterTextFieldStyle())
                     TextField("Dialogue (key lines)", text: binding(for: $dialogue), axis: .vertical)
+                        .textFieldStyle(TypewriterTextFieldStyle())
                     TextField("Acting Note (e.g., angry whisper)", text: binding(for: $actingNotes), axis: .vertical)
+                        .textFieldStyle(TypewriterTextFieldStyle())
                 }
-                .font(.caption)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .font(TypewriterTheme.Fonts.caption())
                 .padding(.leading)
             }
         }

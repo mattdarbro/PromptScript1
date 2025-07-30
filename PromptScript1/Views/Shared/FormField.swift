@@ -18,20 +18,23 @@ struct FormField: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(label)
-                .font(.subheadline)
-                .foregroundColor(.secondary)
+                .font(TypewriterTheme.Fonts.caption())
+                .foregroundColor(TypewriterTheme.Colors.typewriterGray)
             
             if isMultiline {
                 TextEditor(text: $value)
+                    .font(TypewriterTheme.Fonts.body())
                     .frame(minHeight: 100, maxHeight: 200)
-                    .padding(4)
+                    .padding(10)
                     .background(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                        RoundedRectangle(cornerRadius: TypewriterTheme.CornerRadius.small)
+                            .stroke(TypewriterTheme.Colors.lightGray, lineWidth: 1)
                     )
+                    .background(TypewriterTheme.Colors.paperWhite)
+                    .cornerRadius(TypewriterTheme.CornerRadius.small)
             } else {
                 TextField(placeholder, text: $value)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .textFieldStyle(TypewriterTextFieldStyle())
             }
         }
         .padding(.vertical, 4)

@@ -60,9 +60,8 @@ struct ProjectContentView: View {
         .accentColor(.black)
         .onAppear {
             setupTabBarAppearance()
-            setupNavigationAppearance()
         }
-        .navigationTitle(project.name)
+        .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
@@ -133,30 +132,7 @@ struct ProjectContentView: View {
         UITabBar.appearance().tintColor = UIColor.black
     }
     
-    // MARK: - Navigation Bar Styling
-    
-    private func setupNavigationAppearance() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor.systemBackground
-        
-        // Configure back button with black color - hide the text, show only icon
-        appearance.backButtonAppearance.normal.titleTextAttributes = [
-            .foregroundColor: UIColor.clear  // Hide the text
-        ]
-        
-        // Use the same chevron arrow as in TypewriterIcons but pointing left
-        let backImage = UIImage(systemName: "chevron.left")?
-            .withConfiguration(UIImage.SymbolConfiguration(pointSize: 16, weight: .medium))
-            .withTintColor(.black, renderingMode: .alwaysOriginal)
-        
-        appearance.setBackIndicatorImage(backImage, transitionMaskImage: backImage)
-        
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        UINavigationBar.appearance().compactAppearance = appearance
-        UINavigationBar.appearance().tintColor = UIColor.black
-    }
+    // Navigation styling is now handled globally in PromptScript1App.swift
 }
 
 // MARK: - UIViewController Extension

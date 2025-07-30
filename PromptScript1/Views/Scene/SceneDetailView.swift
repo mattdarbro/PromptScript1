@@ -20,11 +20,10 @@ struct SceneDetailView: View {
                     if !scene.description.isEmpty {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Description:")
-                                .font(.custom("Courier New", size: 16))
-                                .foregroundColor(.green)
-                                .fontWeight(.medium)
+                                .font(TypewriterTheme.Fonts.headline(16))
+                                .foregroundColor(TypewriterTheme.Colors.sceneGreen)
                             Text(scene.description)
-                                .font(.custom("Courier New", size: 16))
+                                .font(TypewriterTheme.Fonts.body(16))
                                 .foregroundColor(.primary)
                                 .fixedSize(horizontal: false, vertical: true)
                         }
@@ -90,13 +89,7 @@ struct SceneDetailView: View {
                 Button("Edit Timeline") {
                     showingEditScene = true
                 }
-                .font(.custom("Courier New", size: 16))
-                .foregroundColor(.white)
-                .padding()
-                .background(Color.green)
-                .cornerRadius(8)
-                .shadow(radius: 2)
-                .animation(.spring())
+                .typewriterButton(color: TypewriterTheme.Colors.sceneGreen)
             }
         }
         .sheet(isPresented: $showingEditScene) {

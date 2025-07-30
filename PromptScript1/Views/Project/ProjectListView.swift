@@ -33,11 +33,11 @@ struct ProjectListView: View {
                                 // Display a "Current" tag if this is the active project.
                                 if project.id == projectManager.currentProject?.id {
                                     Text("Current")
-                                        .font(.caption)
-                                        .foregroundColor(.blue)
+                                        .font(TypewriterTheme.Fonts.caption())
+                                        .foregroundColor(TypewriterTheme.Colors.characterBlue)
                                         .padding(.horizontal, 8)
                                         .padding(.vertical, 2)
-                                        .background(Color.blue.opacity(0.1))
+                                        .background(TypewriterTheme.Colors.characterBlue.opacity(0.1))
                                         .cornerRadius(4)
                                 }
                             }
@@ -69,16 +69,12 @@ struct ProjectListView: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("PROJECTS")
-                        .font(.custom("Courier New", size: 18))
-                        .fontWeight(.bold)
-                        .foregroundColor(.black)
+                        .typewriterTitle(size: 18)
                 }
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: { showingNewProjectSheet = true }) {
                         Image(systemName: "plus")
-                            .font(.custom("Courier New", size: 16))
-                            .fontWeight(.bold)
-                            .foregroundColor(.black)
+                            .font(TypewriterTheme.Fonts.body(16))
                     }
                 }
             }
@@ -88,6 +84,7 @@ struct ProjectListView: View {
                     Form {
                         Section("Project Details") {
                             TextField("Project Name", text: $newProjectName)
+                                .textFieldStyle(TypewriterTextFieldStyle())
                             TextField("Description (optional)", text: $newProjectDescription, axis: .vertical)
                                 .lineLimit(3...6)
                         }

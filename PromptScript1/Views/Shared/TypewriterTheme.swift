@@ -115,6 +115,20 @@ struct TypewriterTheme {
     }
 }
 
+struct TypewriterTextFieldStyle: TextFieldStyle {
+    func _body(configuration: TextField<Self._Label>) -> some View {
+        configuration
+            .font(TypewriterTheme.Fonts.body())
+            .padding(10)
+            .background(
+                RoundedRectangle(cornerRadius: TypewriterTheme.CornerRadius.small)
+                    .stroke(TypewriterTheme.Colors.lightGray, lineWidth: 1)
+            )
+            .background(TypewriterTheme.Colors.paperWhite)
+            .cornerRadius(TypewriterTheme.CornerRadius.small)
+    }
+}
+
 // MARK: - Custom View Modifiers
 extension View {
     

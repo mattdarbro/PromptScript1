@@ -12,8 +12,7 @@ struct SceneListView: View {
     // The unsafe bindingForScene function has been removed.
     
     var body: some View {
-        NavigationView {
-            ZStack {
+        ZStack {
                 TypewriterTheme.Colors.Scenes.background
                     .ignoresSafeArea()
                 
@@ -44,7 +43,6 @@ struct SceneListView: View {
             .sheet(isPresented: $showingAddScene) {
                 AddSceneView(scenes: $scenes, characters: characters)
             }
-        }
     }
     
     private func deleteScenes(at offsets: IndexSet) {
